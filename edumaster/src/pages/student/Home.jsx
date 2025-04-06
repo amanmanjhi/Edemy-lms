@@ -1,9 +1,11 @@
 import React from 'react'
+// import Hero from '../../components/student/Hero'
 
 const Home = () => {
   return (
     <div>
-      <h1>Home Page</h1>
+      {/* <Hero></Hero> */}
+      <h1>hero</h1>
     </div>
   )
 }
