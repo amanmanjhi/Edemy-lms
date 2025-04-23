@@ -61,6 +61,9 @@ const CourseDetails = () => {
                     </div>
                     <p className='text-sm md:text-default'> {chapter.chapterContent.length} lectures - {claculateChapterTime(chapter)}</p>
                   </div>
+                  <div>
+                    
+                  </div>
                 </div>
               ))}
             </div>
