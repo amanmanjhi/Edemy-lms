@@ -18,7 +18,7 @@ import { useMatch } from 'react-router-dom';
 
 const App = () => {
 
-  const isEducatorRoute = useMatch('./educator/*')
+  const isEducatorRoute = useMatch('/educator/*')
 
   return (
     <div className='text-default min-h-screen bg-white'>
