@@ -14,7 +14,7 @@ const CourseDetails = () => {
   const [isAlreadyEnrolled, setIsAlreadyEnrolled] =  useState(false);
   const [playerData, setPlayerData] =  useState(null);
 
-  const {allCourses , calculateRating, calculateCourseDuration, calculateNoOfLectures, claculateChapterTime, currency } = useContext(AppContext)
+  const {allCourses , calculateRating, calculateCourseDuration, calculateNoOfLectures, calculateChapterTime, currency } = useContext(AppContext)
 
   const fetchCourseData = async ()=>{
     const findCourse = allCourses.find(course => course._id === id)
@@ -75,7 +75,7 @@ const CourseDetails = () => {
                       <img className={`transform transition-transform ${openSections[index] ? 'rotate-180':''}`} src={assets.down_arrow_icon} alt="arrow icon" />
                       <p className='font-medium md:text-base text-sm'>{chapter.chapterTitle}</p>
                     </div>
-                    <p className='text-sm md:text-default'> {chapter.chapterContent.length} lectures - {claculateChapterTime(chapter)}</p>
+                    <p className='text-sm md:text-default'> {chapter.chapterContent.length} lectures - {calculateChapterTime(chapter)}</p>
                   </div>
 
                   {/* ! lecture details  */}
