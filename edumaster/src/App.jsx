@@ -13,6 +13,7 @@ import StudentsEnrolled from "./pages/educator/StudentsEnrolled";
 import MyCourses from './pages/educator/MyCourses'
 import Navbar from './components/student/Navbar'
 import { useMatch } from 'react-router-dom';
+import "quill/dist/quill.snow.css";
 
 
 
