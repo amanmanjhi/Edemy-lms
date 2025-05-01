@@ -38,7 +38,8 @@ const AddCourse = () => {
 
         };
         setChapters([...chapters, newChapter])
-      } 
+      } }
+
       else if (action === 'remove'){
         setChapters(chapters.filter((chapter)=>chapter.chapterId !== chapterId))
       } 
@@ -47,7 +48,7 @@ const AddCourse = () => {
           chapters.map((chapter)=> chapter.chapterId === chapterId ? {...chapter, collapsed : !chapter.collapsed} : chapter)
         );
       }
-    };
+    
   }
 
   const handleLecture = (action, chapterId, lectureIndex) => {
