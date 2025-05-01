@@ -12,12 +12,15 @@ import User from './models/user.js'
 // ! initialize express 
 let app = express();
 
-//! middlewares
-app.use(cors())
 
 // ! connect DB
 
 await connectDB()
+
+//! middlewares
+app.use(cors())
+
+
 
 // !  routes
 
