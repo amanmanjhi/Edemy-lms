@@ -4,6 +4,9 @@ import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import {clerkWebhooks} from './controllers/webHooks.js'
 import User from './models/user.js'
+import educatorRouter from './routes/educatorRoutes.js'
+import { clerkMiddleware } from '@clerk/express'
+
 
 // const { connectDB }  = require('./config/mongodb.js')
 
@@ -19,6 +22,8 @@ await connectDB()
 //! middlewares
 app.use(cors())
 
+app.use(clerkMiddleware())
+
 
 
 // !  routes
@@ -33,6 +38,8 @@ app.get('/home',(req,res)=>{
 })
 
 app.post('/clerk', express.json(), clerkWebhooks)
+
+app.use('/api/educator', express.json(), educatorRouter)
 
 
 // ! port number
