@@ -28,8 +28,6 @@ app.use(cors())
 app.use(clerkMiddleware())
 
 
-
-
 // !  routes
 
 app.get('/',(req,res)=>{

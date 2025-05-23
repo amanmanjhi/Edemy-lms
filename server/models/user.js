@@ -15,9 +15,7 @@ const userSchema = new mongoose.Schema(
             ref: 'Course'
         }],
     },
-    {
-        timestamps:true
-    }
+    { timestamps:true, minimize:false}
 );
 
 const User = mongoose.model('User',userSchema);

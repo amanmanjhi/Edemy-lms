@@ -1,16 +1,15 @@
 import mongoose from "mongoose";
-import { type } from "os";
-import { isBooleanObject } from "util/types";
 
 
-const chapterContent = new mongoose.Schema(
+
+const lectureSchema = new mongoose.Schema(
     {
-        letureId:{type:String,required:true},
-        letureTitle:{type:String,required:true},
-        letureDuration:{type:Number,required:true},
-        letureUrl:{type:String,required:true},
-        isPreviewFree:{type:Boolean,required:true},
-        letureOrder:{type:Number,required:true},
+        letureId:{type: String,required:true},
+        letureTitle:{type: String,required:true},
+        letureDuration:{type: Number,required:true},
+        letureUrl:{type: String,required:true},
+        isPreviewFree:{type: Boolean,required:true},
+        letureOrder:{type: Number,required:true},
     }, {_id:false}
 );
 
@@ -31,14 +30,17 @@ const courseSchema = new mongoose.Schema(
         coursePrice :{ type: String, required: true },
         isPublished :{ type: Boolean, default: true },
         discount :{ type: Number, required : true, min:0, max:100 },
-        courseContent : [],
+        courseContent : [chapterSchema],
         courseRatings : [
             {userId:{type:String}, rating:{type:Number, min:1, max:5},}
         ],
-        educator:{type: String, ref:'User', required: true},
+        educator:{type: String, ref: 'User', required: true},
         enrolledStudents : [
-            {type:String,ref:'User'}
+            {type: String, ref:'User'}
 
         ],
     },{timestamps:true, minimize:false}
 )
+
+const Course = mongoose.model('Course', courseSchema)
+export default Course;
