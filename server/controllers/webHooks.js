@@ -26,6 +26,7 @@ export const clerkWebhooks = async (req, res) =>{
                     imageUrl: data.image_url,
                 }
                 await User.create(userData)
+                console.log("user created successfully")
                 res.json({success:true, message:"user created successfully"})
                 break;
             }
@@ -37,7 +38,6 @@ export const clerkWebhooks = async (req, res) =>{
                     image: data.image_url,
                     imageUrl : data.image_url,
                 }
-                
                 await User.findByIdAndUpdate(data.id, userData)
                 res.json({success:true,message:"user details updated successfully!"})
                 break;
@@ -55,7 +55,7 @@ export const clerkWebhooks = async (req, res) =>{
 
         }
     }catch(error){
-        console.error("❌ Webhook Error:", error)
+        console.error("Webhook Error:", error)
         res.status(500).json({success:false, message:error.message})
     }
 }
