@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
         name:{type: String, required:true},
         email:{type: String, required:true},
         image:{type: String, required:true},
-        imageUrl:{type: String, required:true},
+        imageUrl:{type: String, required:true}, //todo: make it true after postman testing
         enrolledCourses :[{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Course'
@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     { timestamps:true, minimize:false}
 );
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User', userSchema);
 
 export default User
 

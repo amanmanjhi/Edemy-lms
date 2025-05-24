@@ -7,6 +7,7 @@ const connectDB = async ()=>{
         console.log("dataBase connected")    
     })
     await mongoose.connect(`${process.env.MONGODB_URI}/edemy`)
+    // console.log("collection created")
 }
 
 export default connectDB;

@@ -8,13 +8,8 @@ import educatorRouter from './routes/educatorRoutes.js'
 import { clerkMiddleware } from '@clerk/express'
 import connectCloudinary from './controllers/cloudinary.js'
 
-
-// const { connectDB }  = require('./config/mongodb.js')
-
-
 // ! initialize express 
 let app = express();
-
 
 // ! connect DB
 
@@ -31,7 +26,7 @@ app.use(clerkMiddleware())
 // !  routes
 
 app.get('/',(req,res)=>{
-    res.send("This is home page");
+    res.send("API is working");
 })
 
 app.get('/home',(req,res)=>{
