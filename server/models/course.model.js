@@ -4,12 +4,12 @@ import mongoose from "mongoose";
 
 const lectureSchema = new mongoose.Schema(
     {
-        letureId:{type: String,required:true},
-        letureTitle:{type: String,required:true},
-        letureDuration:{type: Number,required:true},
-        letureUrl:{type: String,required:true},
+        lectureId:{type: String,required:true},
+        lectureTitle:{type: String,required:true},
+        lectureDuration:{type: Number,required:true},
+        lectureUrl:{type: String,required:true},
         isPreviewFree:{type: Boolean,required:true},
-        letureOrder:{type: Number,required:true},
+        lectureOrder:{type: Number,required:true},
     }, {_id:false}
 );
 
