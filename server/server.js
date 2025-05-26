@@ -10,6 +10,7 @@ import connectCloudinary from './config/cloudinary.js'
 import courseRouter from './routes/course.routes.js'
 import userRouter from './routes/user.routes.js'
 import { json } from 'stream/consumers'
+import bodyParser from 'body-parser';
 
 // ! initialize express 
 let app = express();
@@ -32,7 +33,8 @@ app.get('/',(req,res)=>{
     res.send("API is working");
 })
 
-app.post('/clerk', express.json(), clerkWebhooks)
+// app.post('/clerk', express.json(), clerkWebhooks)
+app.post('/clerk', bodyParser.raw({ type: '*/*' }), clerkWebhooks)
 
 app.use('/api/educator', express.json(), educatorRouter); // 8:50
 
