@@ -23,8 +23,8 @@ export const clerkWebhooks = async (req, res) =>{
         const evt = whook.verify(payload, headers); // no stringify
         const { data, type } = evt;
 
-        const {data, type} = req.body;
-        // const {data, type} = evt;
+        // const {data, type} = req.body;
+       
 
         switch(type){
             case 'user.created':{
@@ -80,10 +80,10 @@ export const stripeWebhooks = async(req, res)=>{
     let event;
 
     try {
-        event = Stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+        event = Stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
     }
     catch (err) {
-        response.status(400).send(`Webhook Error: ${err.message}`);
+        res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
     // Handle the event
