@@ -35,7 +35,7 @@ export const userEnrolledCourses = async (req, res) =>{
     }
 } 
 
-// ! FUNCTION TO ACCEPT PAYMENT
+// ! FUNCTION TO purchase a course
 
 export const purchaseCourse = async (req, res) => {
     try {
@@ -127,7 +127,7 @@ export const updateUserCourseProgress = async (req, res)=>{
 
 // ! get User Course Progress 
 
-export const getCourseProgress = async (res, res) =>{
+export const getCourseProgress = async (req, res) =>{
     try{
         const userId = req.auth.userId;
         const { courseId } = req.body;

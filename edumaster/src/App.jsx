@@ -14,7 +14,7 @@ import MyCourses from './pages/educator/MyCourses'
 import Navbar from './components/student/Navbar'
 import { useMatch } from 'react-router-dom';
 import "quill/dist/quill.snow.css";
-
+import { ToastContainer } from 'react-toastify';
 
 
 const App = () => {
@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <div className='text-default min-h-screen bg-white'>
+      <ToastContainer/>
       {!isEducatorRoute && <Navbar />}
       
       <Routes>
