@@ -109,7 +109,7 @@ const AddCourse = () => {
   
   return (
     <div className='h-screen overflow-scroll flex flex-col items-start justify-beteen md:p-8 md:pb-0 p-4 pt-8 pb-0'>
-       <form action="" onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-500'>
+       <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md w-full text-gray-500'>
           {/* -------- course title input ---------------- */}
           <div className='flex flex-col gap-1'>
             <p className=''>Course Title</p>
