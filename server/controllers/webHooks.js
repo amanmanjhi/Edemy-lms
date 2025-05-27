@@ -36,7 +36,7 @@ export const clerkWebhooks = async (req, res) =>{
                     imageUrl: data.image_url,
                 }
                 await User.create(userData)
-                console.log("user created successfully")
+                // console.log("user created successfully")
                 res.json({success:true, message:"user created successfully"})
                 break;
             }
@@ -65,8 +65,8 @@ export const clerkWebhooks = async (req, res) =>{
 
         }
     }catch(error){
-        console.error("Webhook Error:", error)
-        res.status(500).json({success:false, message:error.message})
+        console.error("Webhook Error:", error.message)
+        return res.status(500).json({success:false, message:error.message})
     }
 }
 
@@ -75,7 +75,7 @@ export const clerkWebhooks = async (req, res) =>{
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export const stripeWebhooks = async(req, res)=>{
-    const sig = request.headers['stripe-signature'];
+    const sig = req.headers['stripe-signature'];
 
     let event;
 
@@ -83,7 +83,8 @@ export const stripeWebhooks = async(req, res)=>{
         event = Stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
     }
     catch (err) {
-        res.status(400).send(`Webhook Error: ${err.message}`);
+        console.log("webhook error", err.message)
+        return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
     // Handle the event
@@ -94,13 +95,13 @@ export const stripeWebhooks = async(req, res)=>{
 
       const session = await stripeInstance.checkout.sessions.list({payment_intent:paymentIntentId})
 
-      const {purchaseId } = session.data[0].metadata;
+      const { purchaseId } = session.data[0].metadata;
 
       const purchaseData = await Purchase.findById(purchaseId);
       const userData = await User.findById(purchaseData.userId);
       const courseData = await Course.findById(purchaseData.courseId);
 
-      courseData.enrolledStudents.push(userData);
+      courseData.enrolledStudents.push(userData._id);
       await courseData.save()
 
       userData.enrolledCourses.push(courseData._id);
@@ -134,5 +135,5 @@ export const stripeWebhooks = async(req, res)=>{
   }
 
   // Return a response to acknowledge receipt of the event
-  response.json({received: true});
+  res.json({received: true});
 }

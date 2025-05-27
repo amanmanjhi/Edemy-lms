@@ -40,7 +40,7 @@ app.use('/api/educator', express.json(), educatorRouter); // 8:50
 
 app.use('/api/course', express.json(), courseRouter) // 9:04
 app.use('/api/user', express.json(), userRouter) // 9:15
-app.post('/stripe', express.json({type:'application/json'}),stripeWebhooks)
+app.post('/stripe', bodyParser.raw({type:'application/json'}),stripeWebhooks)
 
 
 

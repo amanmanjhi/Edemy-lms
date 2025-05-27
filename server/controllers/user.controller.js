@@ -1,4 +1,3 @@
-
 import User from "../models/user.js";
 import Course from "../models/course.model.js";
 import Purchase from "../models/purchase.model.js";
@@ -10,7 +9,7 @@ import { CourseProgress } from "../models/courseProgress.model.js";
 export const getUserData = async (req, res)=>{
     try {
         const userId = req.auth.userId;
-        const user = -await User.findById(userId);
+        const user = await User.findById(userId);
         
         if(!user){
           return  res.json({success: false, message: "User Not Found"})

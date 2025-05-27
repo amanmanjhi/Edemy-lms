@@ -38,10 +38,10 @@ const MyEnrollments = () => {
   }, [userData])
 
   useEffect(()=>{
-    if(enrolledCourses.length > 0){
+    if(enrolledCourses && enrolledCourses.length > 0){ //! made changes here
       getCourseProgress()
     }
-  }, [userData])
+  }, [enrolledCourses])
 
   return (
     <>
