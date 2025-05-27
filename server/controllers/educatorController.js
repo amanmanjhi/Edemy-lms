@@ -37,6 +37,7 @@ export const addCourse  = async (req, res) =>{
                 success: false,
                 message: "Thumbnail Not Attached"  
             })
+            return;
         }
 
         const parseCourseData = JSON.parse(courseData)
@@ -86,19 +87,22 @@ export const educatorDashboardData = async (req, res)=>{
         
         const totalEarnings = purchases.reduce((sum, purchase)=>sum + purchase.amount, 0)
 
-        //todo Collect uninque enrolled students Ids with their course titles
-
+        //todo Collect unique enrolled students Ids with their course titles
         const enrolledStudentsData = [];
+        const uniqueStudentIds = new Set();
         for(const course of courses ){
             const students = await User.find({
                 _id:{$in: course.enrolledStudents},
             }, 'name imageUrl');
 
             students.forEach(student => {
-                enrolledStudentsData.push({
-                    courseTitle: course.courseTitle,
-                    student
-                }); 
+                if (!uniqueStudentIds.has(student._id.toString())) {
+                    uniqueStudentIds.add(student._id.toString());
+                    enrolledStudentsData.push({
+                        courseTitle: course.courseTitle,
+                        student
+                    }); 
+                }
             });
         }
 
@@ -134,5 +138,25 @@ export const getEnrolledStudentsData = async (req, res)=>{
 
     } catch (error) {
         res.json({success: false, message:error.message})
+    }
+}
+
+// ! delete course
+
+export const deleteCourse = async (req, res) => {
+    try {
+        const educator = req.auth.userId;
+        const { courseId } = req.params;
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return res.json({ success: false, message: 'Course not found' });
+        }
+        if (course.educator !== educator) {
+            return res.json({ success: false, message: 'Unauthorized: Not your course' });
+        }
+        await Course.findByIdAndDelete(courseId);
+        res.json({ success: true, message: 'Course deleted successfully' });
+    } catch (error) {
+        res.json({ success: false, message: error.message });
     }
 }

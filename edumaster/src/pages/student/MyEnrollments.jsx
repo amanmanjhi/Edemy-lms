@@ -3,6 +3,7 @@ import { AppContext } from '../../context/AppContext'
 import {Line} from 'rc-progress'
 import Footer from '../../components/student/Footer';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const MyEnrollments = () => {
 
@@ -10,7 +11,7 @@ const MyEnrollments = () => {
   const [progressArray, setProgressArray] = useState([])
 
   const getCourseProgress = async () => {
-    const token =  getToken;
+    const token = getToken(); // <-- Call the function
     try {
       const tempProgressArray = await Promise.all(
       enrolledCourses.map(async (course)=>{
@@ -18,7 +19,10 @@ const MyEnrollments = () => {
 
         let totalLectures = calculateNoOfLectures(course);
 
-        const lectureCompleted = data.progressArray ? data.progressData.lectureCompleted.length : 0;
+        // Use correct property from API response
+        const lectureCompleted = data.progressData && data.progressData.lectureCompleted
+          ? data.progressData.lectureCompleted.length
+          : 0;
 
         return {totalLectures, lectureCompleted}
         })

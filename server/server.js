@@ -11,6 +11,7 @@ import courseRouter from './routes/course.routes.js'
 import userRouter from './routes/user.routes.js'
 import { json } from 'stream/consumers'
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 // ! initialize express 
 let app = express();
@@ -21,8 +22,38 @@ await connectDB();
 
 await connectCloudinary();
 
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => {
+  console.error('MongoDB connection error:', err);
+  process.exit(1);
+});
+
 //! middlewares
-app.use(cors())
+app.options('*', cors({
+  origin: [
+    'http://localhost:5173',
+    'https://edemy-frontend-sable.vercel.app', // updated deployed frontend
+    'https://edemy-backend-peach.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://edemy-frontend-sable.vercel.app',
+    'https://edemy-backend-peach.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 app.use(clerkMiddleware())
 // console.log("CLOUDINARY CONNECTED")
@@ -51,5 +82,5 @@ app.listen(PORT, (err) => {
     if(err){
         console.log("there is an error running server")
     }
-    console.log("server is running on port 7000");
+    console.log(`Server running on port ${PORT}`);
 } )
