@@ -4,6 +4,7 @@ import Quill from 'quill';
 import { assets } from '../../assets/assets';
 import { AppContext } from '../../context/AppContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const AddCourse = () => {
@@ -111,7 +112,7 @@ const AddCourse = () => {
         courseContent : chapters
       }
 
-      formData = new FormData()
+      const formData = new FormData()
       formData.append('courseData', JSON.stringify(courseData))
       formData.append('image', image);
 

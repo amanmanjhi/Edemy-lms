@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../context/AppContext'
 import Loading from '../../components/student/Loading'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const MyCourses = () => {
 
@@ -10,10 +11,12 @@ const MyCourses = () => {
 
   const fetchEducatorCourses = async () => {
     try {
-      const token = getToken();
-      const {data} = await axios.post(backendUrl + '/api/educator/courses', {headers:{Authorization:`Bearer ${token}`}})
-
+      const token =  getToken();
+      const {data} = await axios.get(backendUrl + '/api/educator/courses', {headers:{Authorization:`Bearer ${token}`}})
+      // console.log("the courses", data);
       data.success && setCourses(data.courses)
+
+      console.log("the courses", data.courses);
     } catch (error) {
       toast.error(error.message)
     }

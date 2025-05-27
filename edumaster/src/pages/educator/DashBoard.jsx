@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../context/AppContext'
 import { assets, dummyDashboardData } from '../../assets/assets'
 import Loading from '../../components/student/Loading'
-
+import { toast } from 'react-toastify'
+import axios from 'axios'
 const DashBoard = () => {
 
   const {currency, backendUrl, isEducator, getToken } = useContext(AppContext)

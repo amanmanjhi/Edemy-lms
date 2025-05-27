@@ -3,11 +3,12 @@ import { AppContext } from '../../context/AppContext'
 import { dummyStudentEnrolled } from '../../assets/assets'
 import Loading from '../../components/student/Loading';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 const StudentsEnrolled = () => {
   const {backendUrl, getToken, isEducator} = useContext(AppContext)
-  const [ enrolledStudents, setEnrolledStudents] = useState(null);
+  const [ enrolledStudents, setEnrolledStudents] = useState(null); //changed the null value from null to empty array
   const fetchEnrolledStudents = async ()=>{
     try {
       const token = getToken();

@@ -19,11 +19,13 @@ export const AppContextProvider = (props)=>{
 
     // generating token user authorizaion
     const {getToken} = useAuth()
+    console.log("the auth output:", useAuth());
+    
     const {user} = useUser()
 
     // use state variables
     const [ allCourses , setAllCourses] = useState([])
-    const [ isEducator , setIsEducator] = useState(true)
+    const [ isEducator , setIsEducator] = useState(false);
     const [ enrolledCourses , setEnrolledCourses] = useState([])
     const [ userData ,setUserData] = useState(null)
 
